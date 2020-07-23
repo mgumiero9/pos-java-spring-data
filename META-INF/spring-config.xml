@@ -4,7 +4,15 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/jpa https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            https://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/data/jpa
+            https://www.springframework.org/schema/data/jpa/spring-jpa.xsd"
+
+            default-lazy-init="true">
 
     <context:annotation-config/>
     <context:component-scan base-package="model"/>
@@ -20,8 +28,17 @@
     <!-- JPA configuration -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" value="dataSource"/>
-    </bean>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="generateDdl" value="true"/>
+                <property name="databasePlatform" value="PostgreSQL95Dialect"/>
 
+
+            </bean>
+        </property>
+        <property name="persistenceUnitManager" ref="pos-java-spring-data"/>
+
+    </bean>
 
     <jpa:repositories base-package="dao"/>
 
