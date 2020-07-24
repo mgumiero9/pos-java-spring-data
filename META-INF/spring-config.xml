@@ -34,7 +34,6 @@
                 <property name="databasePlatform" value="PostgreSQL95Dialect"/>
             </bean>
         </property>
-        <property name="persistenceUnitManager" ref="pos-java-spring-data"/>
     </bean>
 
     <!-- Transactional configuration -->
