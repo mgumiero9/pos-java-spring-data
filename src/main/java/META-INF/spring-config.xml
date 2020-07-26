@@ -34,13 +34,13 @@
                 <property name="databasePlatform" value="PostgreSQL95Dialect"/>
             </bean>
         </property>
+        <property name="persistenceUnitName" value="pos-java-spring-data"/>
     </bean>
 
     <!-- Transactional configuration -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-
 
     <jpa:repositories base-package="dao"/>
 
