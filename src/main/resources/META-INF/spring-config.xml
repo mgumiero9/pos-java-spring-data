@@ -27,12 +27,14 @@
     </bean>
 
     <!-- JPA configuration -->
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" value="dataSource"/>
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" scope="singleton">
+        <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="database" value="POSTGRESQL"/>
                 <property name="generateDdl" value="true"/>
-                <property name="databasePlatform" value="PostgreSQL95Dialect"/>
+<!--                <property name="databasePlatform" value="PostgreSQL95Dialect"/>-->
             </bean>
         </property>
         
@@ -46,7 +48,7 @@
 
     <!-- Transactional configuration -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+        <property name="entityManagerFactory" value="entityManagerFactory"/>
         <property name="persistenceUnitName" value="pos-java-spring-data"/>
 
     </bean>
