@@ -1,3 +1,4 @@
+import app.model.Customer;
 import dao.SpringDataCustomerInterface;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +16,18 @@ public class AppSpringDataTest {
     @Test
     public void testConfig() {
         System.out.println("successfully initiated");
+    }
+
+    @Test
+    public void testInsert() {
+        final Customer customer = new Customer();
+        customer.setAge(45);
+        customer.setEmail("email@domain3");
+        customer.setName("Marcelo3");
+        customer.setUsername("mgumiero3");
+        customer.setPassword("pwd3");
+
+        customerInterface.save(customer);
     }
 
 }
