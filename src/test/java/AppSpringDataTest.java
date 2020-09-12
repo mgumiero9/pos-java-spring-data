@@ -34,13 +34,13 @@ public class AppSpringDataTest {
     }
 
     @Test
-    public void displayUser() {
+    public void testDisplayUser() {
         final Optional<Customer> customer = customerInterface.findById(1L);
         System.out.println(customer);
     }
 
     @Test
-    public void displayUserParamsOnly() {
+    public void testDisplayUserParamsOnly() {
         final Optional<Customer> customer = customerInterface.findById(1L);
         System.out.println(customer.get().getAge());
         System.out.println(customer.get().getEmail());
@@ -51,9 +51,17 @@ public class AppSpringDataTest {
     }
 
     @Test
-    public void displayAllUsers() {
+    public void testDisplayAllUsers() {
         final Iterable<Customer> customers = customerInterface.findAll();
         customers.forEach(System.out::println);
+    }
+
+    @Test
+    public void testUpdateUser() {
+        final Optional<Customer> optionalCustomer = customerInterface.findById(1L);
+        final Customer customer = optionalCustomer.get();
+        customer.setName("NameChanged");
+        customerInterface.save(customer);
     }
 
 }
