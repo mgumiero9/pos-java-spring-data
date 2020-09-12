@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Iterator;
+import java.util.Optional;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/spring-config.xml"})
 public class AppSpringDataTest {
@@ -28,6 +31,18 @@ public class AppSpringDataTest {
         customer.setPassword("pwd3");
 
         customerInterface.save(customer);
+    }
+
+    @Test
+    public void displayUser() {
+        final Optional<Customer> customer = customerInterface.findById(1L);
+        System.out.println(customer);
+    }
+
+    @Test
+    public void displayAllUsers() {
+        final Iterable<Customer> customers = customerInterface.findAll();
+        customers.forEach(System.out::println);
     }
 
 }
