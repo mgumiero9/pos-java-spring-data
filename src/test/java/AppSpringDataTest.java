@@ -40,6 +40,17 @@ public class AppSpringDataTest {
     }
 
     @Test
+    public void displayUserParamsOnly() {
+        final Optional<Customer> customer = customerInterface.findById(1L);
+        System.out.println(customer.get().getAge());
+        System.out.println(customer.get().getEmail());
+        System.out.println(customer.get().getId());
+        System.out.println(customer.get().getName());
+        System.out.println(customer.get().getUsername());
+        System.out.println(customer.get().getPassword());
+    }
+
+    @Test
     public void displayAllUsers() {
         final Iterable<Customer> customers = customerInterface.findAll();
         customers.forEach(System.out::println);
