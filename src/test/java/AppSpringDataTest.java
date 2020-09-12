@@ -5,9 +5,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.w3c.dom.ls.LSOutput;
 
-import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/spring-config.xml"})
@@ -42,6 +44,7 @@ public class AppSpringDataTest {
     @Test
     public void testDisplayUserParamsOnly() {
         final Optional<Customer> customer = customerInterface.findById(1L);
+        assert customer.isPresent();
         System.out.println(customer.get().getAge());
         System.out.println(customer.get().getEmail());
         System.out.println(customer.get().getId());
@@ -76,6 +79,12 @@ public class AppSpringDataTest {
         final Customer customer = optionalCustomer.orElse(null);
         assert customer != null;
         customerInterface.delete(customer);
+    }
+
+    @Test
+    public void testFindNameByString() {
+        final List<Customer> list = customerInterface.findCustomerByName("Marcelo");
+        list.forEach(System.out::println);
     }
 
 }
