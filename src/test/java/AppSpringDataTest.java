@@ -59,9 +59,23 @@ public class AppSpringDataTest {
     @Test
     public void testUpdateUser() {
         final Optional<Customer> optionalCustomer = customerInterface.findById(1L);
-        final Customer customer = optionalCustomer.get();
+        final Customer customer = optionalCustomer.orElse(null);
+        assert customer != null;
         customer.setName("NameChanged");
         customerInterface.save(customer);
+    }
+
+    @Test
+    public void testDeleteUserById() {
+        customerInterface.deleteById(36L);
+    }
+
+    @Test
+    public void testDeleteUser() {
+        final Optional<Customer> optionalCustomer = customerInterface.findById(34L);
+        final Customer customer = optionalCustomer.orElse(null);
+        assert customer != null;
+        customerInterface.delete(customer);
     }
 
 }
