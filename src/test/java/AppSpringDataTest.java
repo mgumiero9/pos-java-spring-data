@@ -87,4 +87,10 @@ public class AppSpringDataTest {
         list.forEach(System.out::println);
     }
 
+    @Test
+    public void testFindCustomerByParam() {
+        final Customer customer = customerInterface.findCustomerByParam("Marcelo2");
+        System.out.println(customer);
+    }
+
 }
