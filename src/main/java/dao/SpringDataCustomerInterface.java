@@ -17,4 +17,17 @@ public interface SpringDataCustomerInterface extends CrudRepository<Customer, Lo
     @Query(value = "select c from Customer c where c.name = :paramName")
     public Customer findCustomerByParam (@Param("paramName") String paramName);
 
+    /* How to use Interface custom methods: CTRL+Space and select ex. `save` */
+    /* you will see something like: */
+
+    /* @Override */
+    /* <S extends Customer> S save(S entity); */
+
+    /* remove @Override to allow you to rename method */
+    /* And do something like this below, not forgetting to use `save` at the end... */
+
+    default <S extends Customer> S saveCurrent(S entity) {
+        // process what you want
+        return save(entity);
+    }
 }
