@@ -37,4 +37,10 @@ public interface SpringDataCustomerInterface extends CrudRepository<Customer, Lo
     @Transactional
     @Query(value = "delete from Customer c where c.name = ?1")
     public void deleteByName (String name);
+
+    @Modifying
+    @Transactional
+    @Query(value = "update Customer c set c.age = ?2 where c.name = ?1")
+    public void updateByName (String name, Integer age);
+
 }

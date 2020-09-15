@@ -99,4 +99,9 @@ public class AppSpringDataTest {
         System.out.println("user deleted or non-existent");
     }
 
+    @Test
+    public void testUpdateByName() {
+        customerInterface.updateByName("Marcelo6", 46);
+    }
+
 }
