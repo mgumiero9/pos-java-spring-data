@@ -1,10 +1,12 @@
 package dao;
 
 import app.model.Customer;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,4 +32,9 @@ public interface SpringDataCustomerInterface extends CrudRepository<Customer, Lo
         // process what you want
         return save(entity);
     }
+
+    @Modifying
+    @Transactional
+    @Query(value = "delete from Customer c where c.name = ?1")
+    public void deleteByName (String name);
 }

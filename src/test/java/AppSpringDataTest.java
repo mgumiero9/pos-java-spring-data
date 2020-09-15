@@ -27,10 +27,10 @@ public class AppSpringDataTest {
     public void testInsert() {
         final Customer customer = new Customer();
         customer.setAge(45);
-        customer.setEmail("email@domain3");
-        customer.setName("Marcelo3");
-        customer.setUsername("mgumiero3");
-        customer.setPassword("pwd3");
+        customer.setEmail("email@domain6");
+        customer.setName("Marcelo6");
+        customer.setUsername("mgumiero6");
+        customer.setPassword("pwd6");
 
         customerInterface.save(customer);
     }
@@ -91,6 +91,12 @@ public class AppSpringDataTest {
     public void testFindCustomerByParam() {
         final Customer customer = customerInterface.findCustomerByParam("Marcelo2");
         System.out.println(customer);
+    }
+
+    @Test
+    public void testDeleteByName() {
+        customerInterface.deleteByName("Marcelo4");
+        System.out.println("user deleted or non-existent");
     }
 
 }
