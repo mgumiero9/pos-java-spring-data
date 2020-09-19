@@ -1,6 +1,7 @@
 package app.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -16,6 +17,9 @@ public class Customer {
     private String name;
     private String email;
     private int age;
+
+    @OneToMany(mappedBy = "customer", orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Phone> phones;
 
     public Long getId() {
         return id;
@@ -65,6 +69,14 @@ public class Customer {
         this.age = age;
     }
 
+    public List<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(List<Phone> phones) {
+        this.phones = phones;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -74,6 +86,7 @@ public class Customer {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", age=" + age +
+                ", phones=" + phones +
                 '}';
     }
 }

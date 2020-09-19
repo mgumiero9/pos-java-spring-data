@@ -1,15 +1,16 @@
 import app.model.Customer;
+import app.model.Phone;
+import dao.PhoneInterface;
 import dao.SpringDataCustomerInterface;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.w3c.dom.ls.LSOutput;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:META-INF/spring-config.xml"})
@@ -17,6 +18,8 @@ public class AppSpringDataTest {
 
     @Autowired
     private SpringDataCustomerInterface customerInterface;
+    @Autowired
+    private PhoneInterface phoneInterface;
 
     @Test
     public void testConfig() {
@@ -24,21 +27,26 @@ public class AppSpringDataTest {
     }
 
     @Test
-    public void testInsert() {
+    public void testInsertCustomer() {
         final Customer customer = new Customer();
-        customer.setAge(45);
-        customer.setEmail("email@domain6");
-        customer.setName("Marcelo6");
-        customer.setUsername("mgumiero6");
-        customer.setPassword("pwd6");
-
+        customer.setAge(48);
+        customer.setEmail("email@domain8");
+        customer.setName("Marcelo8");
+        customer.setUsername("mgumiero8");
+        customer.setPassword("pwd8");
         customerInterface.save(customer);
     }
 
     @Test
     public void testDisplayUser() {
-        final Optional<Customer> customer = customerInterface.findById(1L);
+        final Optional<Customer> customer = customerInterface.findById(40L);
         System.out.println(customer);
+    }
+
+    @Test
+    public void testDisplayPhone() {
+        final Optional<Phone> optionalPhone = phoneInterface.findById(41l);
+        System.out.println(optionalPhone.orElse(null));
     }
 
     @Test
@@ -102,6 +110,26 @@ public class AppSpringDataTest {
     @Test
     public void testUpdateByName() {
         customerInterface.updateByName("Marcelo6", 46);
+    }
+
+    @Test
+    public void testInsertPhone() {
+        final Phone phone = new Phone();
+        final Customer customer = customerInterface.findCustomerByParam("Marcelo7");
+        phone.setCustomer(customer);
+        phone.setType("mobile");
+        phone.setNumber("777770");
+        phoneInterface.save(phone);
+    }
+
+    @Test
+    public void testUpdateCustomerPhone() {
+        final Customer customer = customerInterface.findCustomerByParam("Marcelo7");
+        final Optional<Phone> optionalPhone = phoneInterface.findById(43L);
+        final ArrayList<Phone> phones = new ArrayList<>();
+        phones.add(optionalPhone.orElse(null));
+        customer.setPhones(phones);
+        customerInterface.save(customer);
     }
 
 }

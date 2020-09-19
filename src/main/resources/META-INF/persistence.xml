@@ -3,6 +3,7 @@
 
     <persistence-unit name="pos-java-spring-data">
         <class>app.model.Customer</class>
+        <class>app.model.Phone</class>
     </persistence-unit>
 
 </persistence>
